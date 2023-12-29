@@ -14,11 +14,11 @@ import pt.ulisboa.tecnico.tuplespaces.contract.user.User.TakeRequest;
 import pt.ulisboa.tecnico.tuplespaces.contract.user.User.TakeResponse;
 
 public class UserServiceImpl extends UserServiceImplBase {
-    private TupleSpace space;
+    private Server.State state;
 
-    public UserServiceImpl(TupleSpace space) {
+    public UserServiceImpl(Server.State state) {
         super();
-        this.space = space;
+        this.state = state;
     }
 
     @Override

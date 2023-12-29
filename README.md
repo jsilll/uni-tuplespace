@@ -20,7 +20,7 @@ As operações disponíveis para o utilizador são as seguintes (usamos a nomenc
 
 * O operador *add* acrescenta um tuplo ao espaço partilhado.
 
-* O operador *read* aceita a descrição do tuplo (recorrendo ao caracter "*") e retorna *um* tuplo que emparelhe com a descrição caso exita, ou *null* caso não exista nenhum tuplo que emarelehe com a descrição. O tuplo *não* é retirado do espaço de tuplos.
+* O operador *read* aceita a descrição do tuplo (recorrendo ao caracter "*") e retorna *um* tuplo que emparelhe com a descrição caso exita, ou *null* caso não exista nenhum tuplo que emarelhe com a descrição. O tuplo *não* é retirado do espaço de tuplos.
 
 * O operador *take* aceita a descrição do tuplo (recorrendo ao caracter "*") e retorna *um* tuplo que emparelhe com a descrição. Esta operação bloqueia o cliente até que exista um tuplo que satisfaça a descrição. O tuplo *é* retirado do espaço de tuplos.
 

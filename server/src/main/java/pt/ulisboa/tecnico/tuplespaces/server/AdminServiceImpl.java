@@ -13,13 +13,12 @@ import pt.ulisboa.tecnico.tuplespaces.contract.admin.Admin.DeactivateResponse;
 import pt.ulisboa.tecnico.tuplespaces.contract.admin.Admin.TupleSpacesStateRequest;
 import pt.ulisboa.tecnico.tuplespaces.contract.admin.Admin.TupleSpacesStateResponse;
 
-
 public class AdminServiceImpl extends AdminServiceImplBase {
-    private TupleSpace space;
+    private Server.State state;
 
-    public AdminServiceImpl(TupleSpace space) {
+    public AdminServiceImpl(Server.State state) {
         super();
-        this.space = space;
+        this.state = state;
     }
 
     @Override
