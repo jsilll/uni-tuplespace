@@ -1,5 +1,9 @@
 package pt.ulisboa.tecnico.tuplespaces.server;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
 import io.grpc.stub.StreamObserver;
 
 import pt.ulisboa.tecnico.tuplespaces.contract.user.UserServiceGrpc.UserServiceImplBase;
@@ -23,7 +27,22 @@ public class UserServiceImpl extends UserServiceImplBase {
 
     @Override
     public void add(AddRequest request, StreamObserver<AddResponse> responseObserver) {
-        throw new UnsupportedOperationException();
+        if (!this.state.isActive()) {
+            responseObserver.onNext(AddResponse.newBuilder().setActive(false).build());
+            responseObserver.onCompleted();
+            return;
+        }
+
+        // get a String[] 
+        final List<String> fields = request.getNewTuple().getAllFields().entrySet().stream()
+                .map(entry -> entry.getValue().toString()).collect(Collectors.toList());
+
+        // this.state.getTupleSpace().add(*fields);
+
+        // somehow call this.state.getTupleSpace().add(tuple);
+        // and get the result
+
+        responseObserver.onNext(AddResponse.newBuilder().setActive(true).build());
     }
 
     @Override
