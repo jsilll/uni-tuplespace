@@ -1,0 +1,24 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.tuplespaces.contract.admin;
+
+import "Common.proto";
+
+message ActivateRequest {}
+
+message ActivateResponse {}
+
+message DeactivateRequest {}
+
+message DeactivateResponse {}
+
+message TupleSpacesStateRequest {}
+
+message TupleSpacesStateResponse {
+  TupleSpacesState state = 1;
+}
+
+service AdminService {
+  rpc activate(ActivateRequest) returns (ActivateResponse);
+  rpc deactivate(DeactivateRequest) returns (DeactivateResponse);
+  rpc getTupleSpacesState(TupleSpacesStateRequest) returns (TupleSpacesStateResponse);
+}

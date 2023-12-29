@@ -1,0 +1,11 @@
+syntax = "proto3";
+package pt.ulisboa.tecnico.tuplespaces.contract;
+
+message Tuple {
+  repeated string fields = 1;
+}
+
+message TupleSpacesState {
+  repeated Tuple state = 1;
+}
+
