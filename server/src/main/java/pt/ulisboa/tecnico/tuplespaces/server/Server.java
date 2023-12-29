@@ -12,9 +12,11 @@ public class Server {
 		}
 
 		final int port = Integer.parseInt(args[0]);
-		final BindableService impl = new AdminServiceImpl();
+		final BindableService user_service = new UserServiceImpl();
+		final BindableService admin_service = new AdminServiceImpl();
 
-		final io.grpc.Server server = ServerBuilder.forPort(port).addService(impl).build();
+		final io.grpc.Server server = ServerBuilder.forPort(port).addService(user_service).addService(admin_service)
+				.build();
 		server.start();
 
 		System.out.println("Server started on port " + port);

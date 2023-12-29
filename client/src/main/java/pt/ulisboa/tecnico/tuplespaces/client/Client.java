@@ -3,8 +3,8 @@ package pt.ulisboa.tecnico.tuplespaces.client;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
-import pt.ulisboa.tecnico.tuplespaces.contract.user.TupleSpacesServiceGrpc;
-import pt.ulisboa.tecnico.tuplespaces.contract.user.TupleSpacesServiceGrpc.TupleSpacesServiceBlockingStub;
+import pt.ulisboa.tecnico.tuplespaces.contract.user.UserServiceGrpc;
+import pt.ulisboa.tecnico.tuplespaces.contract.user.UserServiceGrpc.UserServiceBlockingStub;
 
 public class Client {
 	public static void main(String[] args) throws Exception {
@@ -21,7 +21,7 @@ public class Client {
 		System.out.println(Client.class.getSimpleName() + " started!");
 		
 		final ManagedChannel channel = ManagedChannelBuilder.forTarget(target).usePlaintext().build();
-		final TupleSpacesServiceBlockingStub stub = TupleSpacesServiceGrpc.newBlockingStub(channel);
+		final UserServiceBlockingStub stub = UserServiceGrpc.newBlockingStub(channel);
 
 		// TODO: Implement client code here
 
