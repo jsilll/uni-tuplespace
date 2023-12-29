@@ -12,8 +12,10 @@ public class Server {
 		}
 
 		final int port = Integer.parseInt(args[0]);
-		final BindableService user_service = new UserServiceImpl();
-		final BindableService admin_service = new AdminServiceImpl();
+
+		TupleSpace space = new TupleSpace();
+		final BindableService user_service = new UserServiceImpl(space);
+		final BindableService admin_service = new AdminServiceImpl(space);
 
 		final io.grpc.Server server = ServerBuilder.forPort(port).addService(user_service).addService(admin_service)
 				.build();

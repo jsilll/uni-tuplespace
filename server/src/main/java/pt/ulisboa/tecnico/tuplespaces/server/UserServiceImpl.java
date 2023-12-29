@@ -14,6 +14,13 @@ import pt.ulisboa.tecnico.tuplespaces.contract.user.User.TakeRequest;
 import pt.ulisboa.tecnico.tuplespaces.contract.user.User.TakeResponse;
 
 public class UserServiceImpl extends UserServiceImplBase {
+    private TupleSpace space;
+
+    public UserServiceImpl(TupleSpace space) {
+        super();
+        this.space = space;
+    }
+
     @Override
     public void add(AddRequest request, StreamObserver<AddResponse> responseObserver) {
         throw new UnsupportedOperationException();

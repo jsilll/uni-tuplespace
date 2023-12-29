@@ -15,6 +15,13 @@ import pt.ulisboa.tecnico.tuplespaces.contract.admin.Admin.TupleSpacesStateRespo
 
 
 public class AdminServiceImpl extends AdminServiceImplBase {
+    private TupleSpace space;
+
+    public AdminServiceImpl(TupleSpace space) {
+        super();
+        this.space = space;
+    }
+
     @Override
     public void activate(ActivateRequest req, StreamObserver<ActivateResponse> obs) {
         throw new UnsupportedOperationException();
