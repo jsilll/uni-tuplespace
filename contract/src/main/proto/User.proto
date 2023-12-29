@@ -3,28 +3,17 @@ package pt.ulisboa.tecnico.tuplespaces.contract.user;
 
 import "Common.proto";
 
-message AddRequest {
-  Tuple newTuple = 1;
-}
+message AddRequest { Tuple newTuple = 1; }
 
-message AddResponse {
-}
+message AddResponse { bool active = 1; }
 
-message ReadRequest {
-  string SearchString = 1;
-}
+message ReadRequest { string SearchString = 1; }
 
-message ReadResponse {
-    Tuple result = 1;
-}
+message ReadResponse { Tuple result = 1; }
 
-message TakeRequest {
-  string SearchString = 1;
-}
+message TakeRequest { string SearchString = 1; }
 
-message TakeResponse {
-  Tuple result = 1;
-}
+message TakeResponse { Tuple result = 1; }
 
 service UserService {
   rpc add(AddRequest) returns (AddResponse);
