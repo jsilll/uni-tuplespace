@@ -112,7 +112,7 @@ public class User {
 					System.out.println("Server is not active");
 				}
 			} else {
-				System.out.println("Server sent an invalid response");
+				System.out.println("Error: Server sent an invalid response");
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Could not connect to server");
@@ -144,7 +144,7 @@ public class User {
 					System.out.println("Server is not active");
 				}
 			} else {
-				System.out.println("Server sent an invalid response");
+				System.out.println("Error: Server sent an invalid response");
 			}
 		} catch (Exception e) {
 			System.out.println("Error: Could not connect to server");
