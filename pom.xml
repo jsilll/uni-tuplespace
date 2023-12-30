@@ -13,9 +13,10 @@
 		sorts the projects into the correct build order;
 		builds the selected projects in order. -->
 	<modules>
+		<module>user</module>
+		<module>admin</module>
 		<module>proto</module>
 		<module>server</module>
-		<module>client</module>
 	</modules>
 
 </project>

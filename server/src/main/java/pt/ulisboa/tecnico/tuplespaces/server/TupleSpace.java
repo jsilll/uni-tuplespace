@@ -4,45 +4,24 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class TupleSpace {
-    public class Tuple {
-        private String[] elements;
-
-        public Tuple(String... elements) {
-            this.elements = elements;
-        }
-
-        public String[] getElements() {
-            return elements;
-        }
-
-        @Override
-        public String toString() {
-            StringBuilder sb = new StringBuilder("(");
-            for (String element : elements) {
-                sb.append(element);
-                sb.append(", ");
-            }
-            sb.delete(sb.length() - 2, sb.length());
-            sb.append(")");
-            return sb.toString();
-        }
-    }
-
-    private List<Tuple> tuples;
+    private List<String[]> tuples;
 
     public TupleSpace() {
         this.tuples = new ArrayList<>();
     }
 
     public synchronized void add(String... elements) {
-        tuples.add(new Tuple(elements));
+        tuples.add(elements);
     }
 
-    public synchronized Tuple read(String... elements) { 
-        for (Tuple tuple : tuples) {
+    public synchronized String[] read(String... elements) { 
+        for (String[] tuple : tuples) {
             boolean match = true;
+            if (tuple.length != elements.length) {
+                continue;
+            }
             for (int i = 0; i < elements.length; i++) {
-                if (!elements[i].equals("*") && !elements[i].equals(tuple.getElements()[i])) {
+                if (!elements[i].equals("*") && !elements[i].equals(tuple[i])) {
                     match = false;
                     break;
                 }
@@ -54,11 +33,14 @@ public class TupleSpace {
         return null;
     }
 
-    public synchronized Tuple take(String... elements) {
-        for (Tuple tuple : tuples) {
+    public synchronized String[] take(String... elements) {
+        for (String[] tuple : tuples) {
             boolean match = true;
+            if (tuple.length != elements.length) {
+                continue;
+            }
             for (int i = 0; i < elements.length; i++) {
-                if (!elements[i].equals("*") && !elements[i].equals(tuple.getElements()[i])) {
+                if (!elements[i].equals("*") && !elements[i].equals(tuple[i])) {
                     match = false;
                     break;
                 }
@@ -74,9 +56,14 @@ public class TupleSpace {
     @Override
     public synchronized String toString() {
         StringBuilder sb = new StringBuilder("[");
-        for (Tuple tuple : tuples) {
-            sb.append(tuple.toString());
-            sb.append(", ");
+        for (String[] tuple : tuples) {
+            sb.append("(");
+            for (String element : tuple) {
+                sb.append(element);
+                sb.append(", ");
+            }
+            sb.delete(sb.length() - 2, sb.length());
+            sb.append("), ");
         }
         sb.delete(sb.length() - 2, sb.length());
         sb.append("]");

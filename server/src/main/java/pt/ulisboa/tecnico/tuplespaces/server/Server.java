@@ -1,5 +1,7 @@
 package pt.ulisboa.tecnico.tuplespaces.server;
 
+import java.util.Arrays;
+
 import io.grpc.ServerBuilder;
 import io.grpc.BindableService;
 
@@ -20,6 +22,10 @@ public class Server {
 		public TupleSpace getTupleSpace() {
 			return this.space;
 		}
+
+		synchronized public void setActive(boolean active) {
+			this.active = active;
+		}
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -30,8 +36,9 @@ public class Server {
 		}
 
 		final int port = Integer.parseInt(args[0]);
+		final boolean debug = Arrays.asList(args).contains("--debug");
 
-		State state = new State(false);
+		State state = new State(true);
 		final BindableService user_service = new UserServiceImpl(state);
 		final BindableService admin_service = new AdminServiceImpl(state);
 

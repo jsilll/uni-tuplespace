@@ -7,13 +7,23 @@ message AddRequest { Tuple newTuple = 1; }
 
 message AddResponse { bool active = 1; }
 
-message ReadRequest { string SearchString = 1; }
+message ReadRequest { Tuple template = 1; }
 
-message ReadResponse { Tuple result = 1; }
+message ReadResponse {
+  oneof result {
+    Tuple tuple = 1;
+    bool active = 2;
+  }
+}
 
-message TakeRequest { string SearchString = 1; }
+message TakeRequest { Tuple template = 1; }
 
-message TakeResponse { Tuple result = 1; }
+message TakeResponse {
+  oneof result {
+    Tuple tuple = 1;
+    bool active = 2;
+  }
+}
 
 service UserService {
   rpc add(AddRequest) returns (AddResponse);

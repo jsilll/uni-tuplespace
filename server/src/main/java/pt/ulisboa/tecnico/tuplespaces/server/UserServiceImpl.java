@@ -1,11 +1,10 @@
 package pt.ulisboa.tecnico.tuplespaces.server;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.Arrays;
 
 import io.grpc.stub.StreamObserver;
 
+import pt.ulisboa.tecnico.tuplespaces.contract.Common.Tuple;
 import pt.ulisboa.tecnico.tuplespaces.contract.user.UserServiceGrpc.UserServiceImplBase;
 
 import pt.ulisboa.tecnico.tuplespaces.contract.user.User.AddRequest;
@@ -33,26 +32,56 @@ public class UserServiceImpl extends UserServiceImplBase {
             return;
         }
 
-        // get a String[] 
-        final List<String> fields = request.getNewTuple().getAllFields().entrySet().stream()
-                .map(entry -> entry.getValue().toString()).collect(Collectors.toList());
-
-        // this.state.getTupleSpace().add(*fields);
-
-        // somehow call this.state.getTupleSpace().add(tuple);
-        // and get the result
-
+        final String[] tuple = request.getNewTuple().getFieldsList().toArray(new String[0]);
+        this.state.getTupleSpace().add(tuple);
         responseObserver.onNext(AddResponse.newBuilder().setActive(true).build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void read(ReadRequest request, StreamObserver<ReadResponse> responseObserver) {
-        throw new UnsupportedOperationException();
+        if (!this.state.isActive()) {
+            responseObserver.onNext(ReadResponse.newBuilder().setActive(false).build());
+            responseObserver.onCompleted();
+            return;
+        }
+
+        final String[] tuple = request.getTemplate().getFieldsList().toArray(new String[0]);
+        final String[] result = this.state.getTupleSpace().read(tuple);
+
+        if (result == null) {
+            responseObserver.onNext(ReadResponse.newBuilder().setActive(true).build());
+            responseObserver.onCompleted();
+            return;
+        }
+
+        responseObserver
+                .onNext(ReadResponse.newBuilder().setTuple(Tuple.newBuilder().addAllFields(Arrays.asList(result)))
+                        .build());
+        responseObserver.onCompleted();
     }
 
     @Override
     public void take(TakeRequest request, StreamObserver<TakeResponse> responseObserver) {
-        throw new UnsupportedOperationException();
+        if (!this.state.isActive()) {
+            responseObserver.onNext(TakeResponse.newBuilder().setActive(false).build());
+            responseObserver.onCompleted();
+            return;
+        }
+
+        final String[] tuple = request.getTemplate().getFieldsList().toArray(new String[0]);
+        final String[] result = this.state.getTupleSpace().take(tuple);
+
+        if (result == null) {
+            responseObserver.onNext(TakeResponse.newBuilder().setActive(true).build());
+            responseObserver.onCompleted();
+            return;
+        }
+
+        responseObserver
+                .onNext(TakeResponse.newBuilder().setTuple(Tuple.newBuilder().addAllFields(Arrays.asList(result)))
+                        .build());
+        responseObserver.onCompleted();
     }
 
 }
