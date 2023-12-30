@@ -5,11 +5,15 @@ import "Common.proto";
 
 message ActivateRequest {}
 
-message ActivateResponse {}
+message ActivateResponse {
+  bool previousState = 1;
+}
 
 message DeactivateRequest {}
 
-message DeactivateResponse {}
+message DeactivateResponse {
+  bool previousState = 1;
+}
 
 message TupleSpacesStateRequest {}
 

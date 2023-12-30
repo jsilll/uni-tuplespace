@@ -10,6 +10,10 @@ public class TupleSpace {
         this.tuples = new ArrayList<>();
     }
 
+    public synchronized List<String[]> read() {
+        return new ArrayList<>(tuples);
+    }
+
     public synchronized void add(String... elements) {
         tuples.add(elements);
     }

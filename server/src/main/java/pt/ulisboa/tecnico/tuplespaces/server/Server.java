@@ -23,8 +23,10 @@ public class Server {
 			return this.space;
 		}
 
-		synchronized public void setActive(boolean active) {
+		synchronized public boolean setActive(boolean active) {
+			boolean previous = this.active;
 			this.active = active;
+			return previous;
 		}
 	}
 
