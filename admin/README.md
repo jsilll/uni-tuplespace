@@ -1,8 +1,8 @@
-# Tuplespaces - User
+# Tuplespaces - Admin
 
-This is the user module of the Tuplespaces project.
+This is the admin module of the Tuplespaces project.
 
-The client depends on the contract module, where the protocol buffers shared between server and client are defined. The client needs to know the interface to make remote calls.
+The admin depends on the contract module, where the protocol buffers shared between server and admin are defined. The admin needs to know the interface to make remote calls.
 
 ## Instructions for using Maven
 
